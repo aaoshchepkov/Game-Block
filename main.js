@@ -16,21 +16,20 @@ DomElement.prototype.addElement = function(){
    block.classList.add(this.selector.slice(1));
    block.textContent = 'Блок';
    document.body.prepend(block);
-   block.style.cssText = 'height: ' + this.height + '; \
-   width: ' + this.width + '; \
-   background-color: ' + this.bg + '; \
-   font-size: '  + this.fontSize;
+   block.style.cssText = `height: ${this.height};
+   width: ${this.width};
+   background-color: ${this.bg};
+   font-size: ${this.fontSize}`;
 
  } else if (this.selector[0] === '#'){
    let parag = document.createElement('p');
    parag.id = this.selector.slice(1);
    parag.textContent = 'Параграф';
    document.body.prepend(parag);
-   parag.style.cssText = 'height: ' + this.height + '; \
-   width: ' + this.width + '; \
-   background-color: ' + this.bg + '; \
-   font-size: '  + this.fontSize;
-
+   parag.style.cssText =  `height: ${this.height};
+   width: ${this.width};
+   background-color: ${this.bg};
+   font-size: ${this.fontSize}`;
  }
 };
 

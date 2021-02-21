@@ -1,40 +1,44 @@
 'use strict';
-/*jshint multistr: true */
+document.addEventListener("DOMContentLoaded", () => {
 
-function DomElement(selector, height, width, bg, fontSize){
-  this.selector = selector;
-  this.height = height;
-  this.width = width;
-  this.bg = bg;
-  this.fontSize = fontSize;
-}
-
-DomElement.prototype.addElement = function(){
- 
- if (this.selector[0] === '.' ) {
-   let block = document.createElement('div');
-   block.classList.add(this.selector.slice(1));
-   block.textContent = 'Блок';
-   document.body.prepend(block);
-   block.style.cssText = `height: ${this.height};
+  function DomElement(selector, height, width, bg) {
+    this.selector = selector;
+    this.height = height;
+    this.width = width;
+    this.bg = bg;
+  }
+  DomElement.prototype.addElement = function () {
+    let block = document.createElement('div');
+    block.classList.add(this.selector.slice(1));
+    document.body.prepend(block);
+    block.style.cssText = `height: ${this.height};
    width: ${this.width};
+   position: absolute;
+   top: 50%;
+   bottom: 50%;
+   left: 50%;
+   right: 50%;
    background-color: ${this.bg};
-   font-size: ${this.fontSize}`;
+   font-size: ${this.fontSize};
+   color : ${this.color}`;
+   document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowUp') {
+        let top = block.offsetTop - 10;
+        block.style.top = top + 'px';
+      } else if (event.key === 'ArrowDown') {
+        let down = block.offsetTop + 10;
+        block.style.top = down + 'px';
+      } else if (event.key === 'ArrowLeft') {
+        let left = block.offsetLeft - 10;
+        block.style.left = left + 'px';
+      } else if (event.key === 'ArrowRight') {
+        let right = block.offsetLeft + 10;
+        block.style.left = right + 'px';
+      }
+    });
+  };
 
- } else if (this.selector[0] === '#'){
-   let parag = document.createElement('p');
-   parag.id = this.selector.slice(1);
-   parag.textContent = 'Параграф';
-   document.body.prepend(parag);
-   parag.style.cssText =  `height: ${this.height};
-   width: ${this.width};
-   background-color: ${this.bg};
-   font-size: ${this.fontSize}`;
- }
-};
+  let elementDiv = new DomElement('.block', '100px', '100px', 'red');
+  elementDiv.addElement();
 
-let elementDiv = new DomElement('.block', '40px', '200px', 'red', '20px');
-let elementP = new DomElement('#parag', '40px', '200px', 'tomato', '20px');
-
-elementDiv.addElement();
-elementP.addElement();
+});
